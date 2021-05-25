@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Download｜ASTER GDEM</title>
+  <meta name="description" content="">
+  <meta property="og:title" content="Download｜ASTER GDEM">
+  <meta property="og:description" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://">
+  <meta property="og:image" content="https://">
+  <meta property="og:site_name" content="ASTER GDEM">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/reset.css" media="all">
+  <link rel="stylesheet" href="./css/base.css" media="all">
+  <link rel="stylesheet" href="./css/style.css" media="all">
+  <link rel="stylesheet" href="./assets/ol4/css/ol.css" type="text/css">
+
+  <!-- JS -->
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+  <script src="./assets/ol4/js/ol.js"></script>
+  <script src="./assets/ol4/js/validTiles.js"></script>
+  <script src="./assets/ol4/js/map3_en.js"></script>
+</head>
+
+<body id="download">
+<header>
+  <div id="header_logo">
+    <img src="./images/logo.png" alt="ASTER GDEM">
+  </div>
+  <div id="language">
+    <a href="index.html"><img src="./images/icon_lang_ja.png" alt="言語切替 日本語" width="20"> 日本語</a>
+  </div>
+</header>
+
+<div id="download_content">
+  <div id="main">
+    <div id="left_navi">
+      <div class="tabs">
+        <label id="tab_map" class="tab_item tab_select">Map</label>
+        <label id="tab_latlon" class="tab_item">Coordinate</label>
+      </div>
+      <div class="tab_content" id="map_content">
+        <div id="floating-panel">
+          <div class="download_list">
+            <ul id="download_list">
+              <div class="howto">
+                <p>１．Click <img src="./images/howtodraw_en.png" alt="select and deselect"> button and move the cursor to your download area.</p>
+                <p class="mt20">２．Select the area by dragging from the upper left to lower right on the map.</p>
+                <img src="./images/howto.gif" alt="" width="250">
+                <p>Selected tiles in the area will be highlighted in yellow.</p>
+                <p class="mt20">３．Selected tiles can be download using the <img src="./images/icon_download.png" alt="download"> button.</p>
+              </div>
+            </ul>
+          </div>
+          <div class="cursor_info">
+            <div>Tiles for download　<span id="download_counts"></span></div>
+            <div>Cursor coordinate　<span id="mouse"></span></div>
+          </div>
+        </div>
+        <!-- #floating-panel -->
+      </div>
+      <div class="tab_content" id="latlon_content">
+        <p>Please enter the coordinate you wish to download. (e.g.) N34, E134</p>
+        <div class="latlons">
+          <label>Latitude <input type="text" id="lat_1" name="lat_1" maxlength="3" placeholder="N34"></label>
+          <label>Longitude <input type="text" id="lon_1" name="lon_1" maxlength="4" placeholder="E134"></label>
+          <button id="latlon_btn" class="latlon_btn"></button>
+        </div>
+      </div>
+    </div>
+    <div id="map">
+      <div id="map_option">
+        <ul class="en">
+          <li id="draw"><span class="icon_tool icon_draw"></span><span class="icon_text">Area Select / Deselect</span></li>
+        </ul>
+        <ul class="en">
+          <li id="scale_up"><span class="icon_tool icon_scaleup"></span><span class="icon_text">Enlarge Selection</span></li>
+        </ul>
+        <ul class="en">
+          <li id="scale_down"><span class="icon_tool icon_scaledown"></span><span class="icon_text">Shrink Selection</span></li>
+        </ul>
+        <ul class="en">
+          <li id="grid"><span class="icon_tool icon_showgrid"></span><span class="icon_text">Display Tiles</span></li>
+        </ul>
+        <ul class="en">
+          <li id="whole_world"><span class="icon_tool icon_wholeworld"></span><span class="icon_text">World Map</span></li>
+        </ul>
+        <!-- 20190802 yun delete start -->
+        <!--
+                            <ul class="en">
+                                <li id="ocean"><span class="icon_tool icon_showocean"></span><span class="icon_text">Sea Tiles</span></li>
+                            </ul>
+        -->
+        <!-- 20190802 yun delete start -->
+      </div>
+      <!-- #map_option -->
+    </div>
+
+    <div id="loading" class="map_overlay">
+      <div class="loading_en"></div>
+    </div>
+  </div>
+</div>
+<!-- #download_content -->
+</body>
+
+</html>
